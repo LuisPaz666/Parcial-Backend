@@ -4,6 +4,7 @@ import { Roles } from '../common/decorators/roles.decorator';
 import { Role } from '../common/enums/role.enum';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
+import { CreateEstudianteDto } from './dto/create-estudiante.dto';
 import { EstudianteService } from './estudiante.service';
 
 @ApiTags('estudiantes')
@@ -18,8 +19,8 @@ export class EstudianteController {
   @ApiOperation({ summary: 'Crear estudiante (solo admin)' })
   @ApiResponse({ status: 201, description: 'Estudiante creado' })
   @ApiResponse({ status: 403, description: 'Acceso denegado' })
-  async create(@Body('nombre') nombre: string, @Body('codigo') codigo: string) {
-    return this.estudianteService.create(nombre, codigo);
+  async create(@Body() dto: CreateEstudianteDto) {
+    return this.estudianteService.create(dto.nombre, dto.codigo);
   }
 
   @Get()
