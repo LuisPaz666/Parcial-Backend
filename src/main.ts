@@ -27,7 +27,7 @@ async function bootstrap() {
 
   // TODO (estudiante): Habilita CORS si un cliente externo consume esta API.
 
-  const port = Number(configService.get<string>('PORT')) || 3000;
+  const port = Number(configService.get<string>('PORT')) || 8080;
   await app.listen(port, '0.0.0.0');
   console.log(`Server is running on port ${port}`);
   console.log(`Swagger docs: http://localhost:${port}/api`);
