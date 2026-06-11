@@ -24,6 +24,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --only=production
 
 COPY --from=builder /app/dist ./dist
+COPY ca.pem ./ca.pem
 
 CMD ["node", "dist/main.js"]
 
