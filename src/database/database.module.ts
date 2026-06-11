@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { readFileSync } from 'fs';
 import { UsersModule } from '../users/users.module';
 import { DatabaseInitService } from './database-init.service';
 
@@ -19,7 +20,9 @@ import { DatabaseInitService } from './database-init.service';
         synchronize: configService.get<string>('DB_SYNCHRONIZE') === 'true',
         logging: configService.get<string>('DB_LOGGING') === 'true',
         autoLoadEntities: true,
-        // TODO (estudiante): Agrega la configuración SSL si tu proveedor de base de datos lo requiere.
+        ssl: {
+          ca: readFileSync('ca.pem').toString(),
+        },
       }),
     }),
     UsersModule,
